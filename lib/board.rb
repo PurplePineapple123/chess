@@ -10,7 +10,6 @@ class Board
   end
 
   def display_board(board = @board)
-    piece_setup
     
     puts "8 | #{board[7][0]} | #{board[7][1]} | #{board[7][2]} | #{board[7][3]} | #{board[7][4]} | #{board[7][5]} | #{board[7][6]} | #{board[7][7]}"
     puts "7 | #{board[6][0]} | #{board[6][1]} | #{board[6][2]} | #{board[6][3]} | #{board[6][4]} | #{board[6][5]} | #{board[6][6]} | #{board[6][7]}"
@@ -32,16 +31,12 @@ class Board
   end
 
 
-  def update_board
-
+  def update_board(start, last)
+    @board[start[0]][start[1]] = ' .  '
+    @board[last[0]][last[1]] = 'P(?)'
   end
 
-  def move_pawn
-    if test
-      
-    end
-
-  end
+  
 
 
 

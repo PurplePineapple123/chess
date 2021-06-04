@@ -7,7 +7,7 @@ class Game
   
   include Pawn
 
-  attr_reader :board, :last
+  attr_reader :board, :selected_piece, :player_move, :coordinate_difference
 
   def initialize
     @board = Board.new
@@ -44,45 +44,9 @@ class Game
     @coordinate_difference = @player_move[0] - @selected_piece[0], @player_move[1] - @selected_piece[1]
   end
 
-  def pawn_blockage?
-
-    until @start == @last || @pawn_blockage == true
-      @start = @start[0] + 1, @start[1]
-      if @board.board[@start[0]][@start[1]] == ' .  '
-        puts "start: #{@start}"
-      else
-        puts 'pawn blockage'
-        @pawn_blockage = true
-      end
-    end
-    
-    @pawn_blockage == true ? true : false
-
+  def move_piece
+    @board.update_board(@selected_piece, @player_move)
   end
-
-  def pawn_first_move?
-    return true if @selected_piece[0] == 1
-  end 
-
-  def is_pawn?
-    if @board.board[@start[0]][@start[1]] == 'P(b)' ||
-       @board.board[@start[0]][@start[1]] == 'P(w)'
-      return true
-    else
-      puts "nope"
-    end
-  end
-
-  def temp_pawn_script
-    piece_selection
-    move_to_coordinates
-    find_coordinate_difference
-    
-    if is_pawn? && valid_move? && pawn_blockage? == false
-      puts "yeet"
-    end
-  end
-
 
 end
 
