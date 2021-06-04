@@ -1,9 +1,9 @@
 # /lib/board.rb
 
-require_relative 'pawn.rb'
-
 
 class Board
+  
+  attr_reader :board
   
   def initialize
     @board = Array.new(8) { Array.new([' .  ', ' .  ', ' .  ', ' .  ', ' .  ', ' .  ', ' .  ', ' .  ']) }
@@ -32,7 +32,20 @@ class Board
   end
 
 
+  def update_board
+
+  end
+
+  def move_pawn
+    if test
+      
+    end
+
+  end
+
+
+
 end
 
-board = Board.new
-board.display_board
+# new_board = Board.new
+# new_board.display_board
