@@ -9,19 +9,16 @@ def play_game
   game = Game.new
   game.board.piece_setup
   
-  3.times do
+  # this doesn't break out if a conidition is false. Real script will need to
+  5.times do
   game.piece_selection
   game.move_to_coordinates
   game.find_coordinate_difference
+  game.pass_pawn_variables
 
   game.board.display_board
 
-  game.is_pawn?
-  game.pawn_first_move?
-  game.valid_move?
-  game.pawn_blockage?
-
-  game.move_piece
+  game.pawn.pawn_movement_checks
 
   game.board.display_board
   end

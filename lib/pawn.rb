@@ -1,45 +1,71 @@
 # /lib/pawn.rb
+require_relative './pieces'
 
+class Pawn
+  include Pieces
 
-module Pawn
-  #include Pieces
-  
-  
-  @attack_move = [[1, 1], [-1, 1]]
-  @elligible_move
+  attr_reader :last
 
-  
+  def initialize
+    @pawn_blockage = false
+    @first_move = [[0, 2], [0, 1]]
+    @normal_move = [[0, 1]]
+    @attack_move = [[1, 1], [-1, 1]]
+    @white_pieces = ['P(w)', 'R(w)', 'N(w)', 'B(w)', 'Q(w)', 'K(w)']
+    @black_pieces = ['P(b)', 'R(b)', 'N(b)', 'B(b)', 'Q(b)', 'K(b)']
+  end
+
+  def selected_piece(piece)
+    @selected_piece = piece
+  end
+
+  def start_variable(start)
+    @start = start
+  end
+
+  def last_variable(last)
+    @last = last
+  end
+
+  def pawn_coordinate_difference(coordinate)
+    @coordinate_difference = coordinate
+  end
+
+  def pawn_board_access(board)
+    @board = board
+  end
+
   # is piece a pawn?
   def is_pawn?
-    
-    if @board.board[@start[0]][@start[1]] == 'P(b)' ||
-       @board.board[@start[0]][@start[1]] == 'P(w)'
-      return true
+    if @board.piece_at_coordinates(@start) == "P(b)" ||
+       @board.piece_at_coordinates(@start) == "P(w)"
+      puts "is a pawn"
+      true
     else
-      puts "nope"
+      false
     end
   end
 
   # is it the pawns first move?
+
   def pawn_first_move?
     return true if @selected_piece[0] == 1
-  end 
-  
+  end
+
   # using piece rules, is this a valid move?
   def valid_move?
-    @first_move = [[2, 0], [1, 0]]
-    @normal_move = [[1, 0]]
-    
-    if pawn_first_move?
+    if attack_move? == true
+      return true
+    elsif pawn_first_move?
       @first_move.each do |coordinate|
-        if coordinate == find_coordinate_difference
+        if coordinate == @coordinate_difference
           @elligible_move = coordinate
           return true
         end
       end
     else
       @normal_move.each do |coordinate|
-        if coordinate == find_coordinate_difference
+        if coordinate == @coordinate_difference
           @elligible_move = coordinate
           return true
         end
@@ -49,30 +75,73 @@ module Pawn
 
   # is there a piece in the way of the desired move?
   def pawn_blockage?
+    
+    if attack_move? == true 
+      return @pawn_blockage = false
+    end
+    
     until @start == @last || @pawn_blockage == true
       @start = @start[0] + 1, @start[1]
-      if @board.board[@start[0]][@start[1]] == ' .  '
+      if @board.piece_at_coordinates(@start) == " .  "
         puts "start: #{@start}"
       else
-        puts 'pawn blockage'
+        puts "pawn blockage"
         @pawn_blockage = true
       end
     end
-    
-    @pawn_blockage == true ? true : false
 
+    @pawn_blockage == true ? true : false
   end
 
-  def move_pawn?
-    if is_pawn? && valid_move? && pawn_blockage? == false
-      puts "move"
-      return true
+  def pawn_color
+    if @board.piece_at_coordinates(@start) == "P(b)"
+      @pawn_piece = "P(b)"
+    elsif @board.piece_at_coordinates(@start) == "P(w)"
+      @pawn_piece = "P(w)"
     end
   end
 
   def attack_move?
+
     # if diagonal moves contain black pieces (not white)
+    @attack_move.each do |coordinate|
+      if coordinate == @coordinate_difference && attack_correct_color == true
+        return true
+      end
+    end
   end
 
-  
+  # if it's a black pawn and diagonal contains a white piece, valid attack move
+  def attack_correct_color
+    if @pawn_piece == 'P(b)'
+      @white_pieces.each do |piece|
+        if piece == @board.piece_at_coordinates(@last)
+          return true
+        end
+      end
+    elsif @pawn_piece == 'P(w)'
+      @black_pieces.each do |piece|
+        if piece == @board.piece_at_coordinates(@last)
+          return true
+        end
+      end
+    end
+  end
+
+  def move_piece
+    @board.update_board(@selected_piece, @last, @pawn_piece)
+  end
+
+  def pawn_movement_checks
+    if is_pawn?
+      pawn_color
+      if valid_move? == true && pawn_blockage? == false
+        move_piece
+      else
+        puts "redo piece entry"
+      end
+    else
+      puts "not a pawn"
+    end
+  end
 end
