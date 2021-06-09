@@ -19,13 +19,12 @@ class Board
     puts "3 | #{board[2][0]} | #{board[2][1]} | #{board[2][2]} | #{board[2][3]} | #{board[2][4]} | #{board[2][5]} | #{board[2][6]} | #{board[2][7]}"
     puts "2 | #{board[1][0]} | #{board[1][1]} | #{board[1][2]} | #{board[1][3]} | #{board[1][4]} | #{board[1][5]} | #{board[1][6]} | #{board[1][7]}"
     puts "1 | #{board[0][0]} | #{board[0][1]} | #{board[0][2]} | #{board[0][3]} | #{board[0][4]} | #{board[0][5]} | #{board[0][6]} | #{board[0][7]}"
-    puts '     A1  |  B2  |  C3  |  D4  |  E5  |  F6  |  G7  |  H8  '
+    puts '     A   |  B   |  C   |  D   |  E   |  F   |  G   |  H   '
   end
 
   def piece_setup
     @board[1] = ['P(w)', 'P(w)', 'P(w)', 'P(w)', 'P(w)', 'P(w)', 'P(w)', 'P(w)']
     @board[0] = ['R(w)', 'N(w)', 'B(w)', 'Q(w)', 'K(w)', 'B(w)', 'N(w)', 'R(w)']
-  
     @board[6] = ['P(b)', 'P(b)', 'P(b)', 'P(b)', 'P(b)', 'P(b)', 'P(b)', 'P(b)']
     @board[7] = ['R(b)', 'N(b)', 'B(b)', 'Q(b)', 'K(b)', 'B(b)', 'N(b)', 'R(b)']
   end
@@ -41,15 +40,12 @@ class Board
       @board[last[0]][last[1]] = 'P(b)'
     elsif piece == 'P(w)'
       @board[last[0]][last[1]] = 'P(w)'
+    elsif piece == 'N(b)'
+        @board[last[0]][last[1]] = 'N(b)'
+    elsif piece == 'N(w)'
+        @board[last[0]][last[1]] = 'N(w)'
     end
   end
-
-  def reflect_game_board
-    @board.reverse!
-  end
-
-
-
 end
 
 # new_board = Board.new

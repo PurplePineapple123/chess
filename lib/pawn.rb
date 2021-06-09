@@ -2,6 +2,7 @@
 require_relative "./pieces"
 
 class Pawn
+
   include Pieces
 
   attr_reader :last
@@ -16,28 +17,8 @@ class Pawn
     @normal_move_black = [[0, -1]]
     @attack_move_black = [[-1, -1], [1, -1]]
 
-    @white_pieces = ["P(w)", "R(w)", "N(w)", "B(w)", "Q(w)", "K(w)"]
-    @black_pieces = ["P(b)", "R(b)", "N(b)", "B(b)", "Q(b)", "K(b)"]
-  end
-
-  def selected_piece(piece)
-    @selected_piece = piece
-  end
-
-  def start_variable(start)
-    @start = start
-  end
-
-  def last_variable(last)
-    @last = last
-  end
-
-  def pawn_coordinate_difference(coordinate)
-    @coordinate_difference = coordinate
-  end
-
-  def pawn_board_access(board)
-    @board = board
+    @initialize_pieces = pieces_variables
+    
   end
 
   # is piece a pawn?
@@ -124,15 +105,12 @@ class Pawn
     end
   end
 
-  def move_piece
-    @board.update_board(@selected_piece, @last, @pawn_piece)
-  end
 
   def pawn_movement_checks
     if is_pawn?
       pawn_color
       if valid_move? == true && pawn_blockage? == false
-        move_piece
+        move_piece(@selected_piece, @last, @pawn_piece)
       else
         puts valid_move?
         puts "redo piece entry"

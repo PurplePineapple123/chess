@@ -1,15 +1,18 @@
 # /lib/game.rb
 
 require_relative 'board.rb'
+require_relative './knight'
+
 require_relative './pawn'
 
 class Game
   
-  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn
+  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight
 
   def initialize
     @board = Board.new
     @pawn = Pawn.new
+    @knight = Knight.new
     @player_turn = 1
     @player_move 
     @selected_piece
@@ -24,7 +27,15 @@ class Game
     @pawn.start_variable(@start)
     @pawn.last_variable(@last)
     @pawn.pawn_coordinate_difference(@coordinate_difference)
-    @pawn.pawn_board_access(@board)
+    @pawn.board_access(@board)
+  end
+
+  def pass_knight_variables
+    @knight.selected_piece(@selected_piece)
+    @knight.start_variable(@start)
+    @knight.last_variable(@last)
+    @knight.pawn_coordinate_difference(@coordinate_difference)
+    @knight.board_access(@board)
   end
 
   def piece_selection
@@ -56,10 +67,6 @@ class Game
     @coordinate_difference = @player_move[1] - @selected_piece[1], @player_move[0] - @selected_piece[0]
   end
 
-#only configured for pawn right now
-  # def move_piece 
-  #   @board.update_board(@selected_piece, @player_move, @pawn.pawn_movement_checks)
-  # end
 
 end
 
