@@ -44,7 +44,6 @@ class Pawn
   def is_pawn?
     if @board.piece_at_coordinates(@start) == "P(b)" ||
        @board.piece_at_coordinates(@start) == "P(w)"
-      puts "is a pawn"
       true
     else
       false
@@ -54,8 +53,6 @@ class Pawn
   # is it the pawns first move?
 
   def pawn_first_move?
-    puts @selected_piece[0]
-
     return true if (@selected_piece[0] == 1 && @pawn_piece == "P(w)") ||
                    (@selected_piece[0] == 6 && @pawn_piece == "P(b)")
   end
@@ -70,13 +67,12 @@ class Pawn
       elsif @pawn_piece == "P(b)"
         first_move_black
       end
-      # else
-      #   @normal_move.each do |coordinate|
-      #     if coordinate == @coordinate_difference
-      #       @elligible_move = coordinate
-      #       return true
-      #     end
-      #   end
+    else
+      if @pawn_piece == "P(w)"
+        normal_move_white
+      elsif @pawn_piece == "P(b)"
+        normal_move_black
+      end
     end
   end
 
@@ -87,33 +83,11 @@ class Pawn
     end
 
     if @pawn_piece == "P(w)"
-      until @start == @last || @pawn_blockage == true
-        @start = @start[0] + 1, @start[1]
-        if @board.piece_at_coordinates(@start) == " .  "
-          puts "start: #{@start}"
-        else
-          puts "pawn blockage"
-          @pawn_blockage = true
-        end
-      end
+      pawn_blockage_white_test
+    elsif @pawn_piece == "P(b)"
+      pawn_blockage_black_test
     end
-
-    if @pawn_piece == "P(b)"
-      puts "start: #{@start}"
-
-      puts "last: #{@last}"
-
-      until @start == @last || @pawn_blockage == true
-        @start = @start[0] - 1, @start[1]
-        if @board.piece_at_coordinates(@start) == " .  "
-          puts "start: #{@start}"
-        else
-          puts "pawn blockage"
-          @pawn_blockage = true
-        end
-      end
-    end
-
+    
     @pawn_blockage == true ? true : false
   end
 
@@ -172,33 +146,62 @@ class Pawn
 
   def first_move_white
     @first_move_white.each do |coordinate|
-      if coordinate == @coordinate_difference
-        return true
-      end
+      return true if coordinate == @coordinate_difference
     end
   end
 
   def first_move_black
     @first_move_black.each do |coordinate|
-      if coordinate == @coordinate_difference
-        return true
-      end
+      return true if coordinate == @coordinate_difference
     end
   end
 
   def attack_move_white
     @attack_move_white.each do |coordinate|
-      if coordinate == @coordinate_difference && attack_correct_color == true
-        return true
-      end
+      return true if coordinate == @coordinate_difference && attack_correct_color == true
     end
   end
 
   def attack_move_black
     @attack_move_black.each do |coordinate|
-      if coordinate == @coordinate_difference && attack_correct_color == true
-        return true
+      return true if coordinate == @coordinate_difference && attack_correct_color == true
+    end
+  end
+
+  def normal_move_white
+    @normal_move_white.each do |coordinate|
+      return true if coordinate == @coordinate_difference
+    end
+  end
+
+  def normal_move_black
+    @normal_move_black.each do |coordinate|
+      return true if coordinate == @coordinate_difference
+    end
+  end
+
+  def pawn_blockage_white_test
+    until @start == @last || @pawn_blockage == true
+      @start = @start[0] + 1, @start[1]
+      if @board.piece_at_coordinates(@start) == " .  "
+        puts "start: #{@start}"
+      else
+        puts "pawn blockage"
+        @pawn_blockage = true
       end
     end
   end
+
+  def pawn_blockage_black_test
+    until @start == @last || @pawn_blockage == true
+      @start = @start[0] - 1, @start[1]
+      if @board.piece_at_coordinates(@start) == " .  "
+        puts "start: #{@start}"
+      else
+        puts "pawn blockage"
+        @pawn_blockage = true
+      end
+    end
+  end
+
 end
