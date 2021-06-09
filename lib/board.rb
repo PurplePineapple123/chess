@@ -45,7 +45,7 @@ class Board
   end
 
   def reflect_game_board
-    
+    @board.reverse!
   end
 
 
@@ -53,4 +53,11 @@ class Board
 end
 
 # new_board = Board.new
+# new_board.piece_setup
+# new_board.display_board
+# puts ""
+# new_board.reflect_game_board
+# new_board.display_board
+# puts ""
+# new_board.reflect_game_board
 # new_board.display_board
