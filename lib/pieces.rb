@@ -31,4 +31,28 @@ module Pieces
     @board.update_board(selected_piece, last, piece)
   end
 
+  def white_attack_black?
+    @black_pieces.each do |piece|
+      if piece == @board.piece_at_coordinates(@last)
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+  def black_attack_white?
+    @white_pieces.each do |piece|
+      if piece == @board.piece_at_coordinates(@last)
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+  def normal_move?
+    return true if @board.piece_at_coordinates(@last) == " .  "
+  end
+
 end

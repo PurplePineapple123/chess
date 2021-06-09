@@ -21,47 +21,30 @@ class Knight
   end
 
   def valid_move?
+    @moves.each do |move|
+      if move == @coordinate_difference
+        return true
+      end
+    end      
+  end
+
+  def valid_end_coordinate?
     if @knight_color == "N(b)" && (black_attack_white? || normal_move?)
       return true
     elsif @knight_color == "N(w)" && (white_attack_black? || normal_move?)
       return true
     end
+    
   end
-
-
 
   def knight_movement_checks
     if is_knight?
-      if valid_move? == true 
+      if valid_move? == true && valid_end_coordinate? == true
         move_piece(@selected_piece, @last, @knight_color)
       else
         puts "redo piece entry"
       end
     end
   end
-
-  private
-
-  def white_attack_black?
-    @black_pieces.each do |piece|
-      if piece == @board.piece_at_coordinates(@last)
-        return true
-      end
-    end
-  end
-
-  def black_attack_white?
-    @white_pieces.each do |piece|
-      if piece == @board.piece_at_coordinates(@last)
-        return true
-      end
-    end
-  end
-
-  def normal_move?
-    return true if @board.piece_at_coordinates(@last) == ' .  '
-  end
-
-  
 
 end

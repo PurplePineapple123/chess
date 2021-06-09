@@ -2,7 +2,6 @@
 require_relative "./pieces"
 
 class Pawn
-
   include Pieces
 
   attr_reader :last
@@ -18,7 +17,6 @@ class Pawn
     @attack_move_black = [[-1, -1], [1, -1]]
 
     @initialize_pieces = pieces_variables
-    
   end
 
   # is piece a pawn?
@@ -68,7 +66,7 @@ class Pawn
     elsif @pawn_piece == "P(b)"
       pawn_blockage_black_test
     end
-    
+
     @pawn_blockage == true ? true : false
   end
 
@@ -105,7 +103,6 @@ class Pawn
     end
   end
 
-
   def pawn_movement_checks
     if is_pawn?
       pawn_color
@@ -115,8 +112,6 @@ class Pawn
         puts valid_move?
         puts "redo piece entry"
       end
-    else
-      puts "not a pawn"
     end
   end
 
@@ -181,5 +176,4 @@ class Pawn
       end
     end
   end
-
 end

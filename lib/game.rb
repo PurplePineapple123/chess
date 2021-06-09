@@ -13,6 +13,7 @@ class Game
     @board = Board.new
     @pawn = Pawn.new
     @knight = Knight.new
+    #@rook = Rook.new
     @player_turn = 1
     @player_move 
     @selected_piece
@@ -38,12 +39,20 @@ class Game
     @knight.board_access(@board)
   end
 
+  def pass_rook_variables
+    @rook.selected_piece(@selected_piece)
+    @rook.start_variable(@start)
+    @rook.last_variable(@last)
+    @rook.pawn_coordinate_difference(@coordinate_difference)
+    @rook.board_access(@board)
+  end
+
   def piece_selection
     # need to add proper letter check (make all lowercase)
-    #proper input check
+    # proper input check(error handling loop)
     
    
-    puts "Player #{@player_turn}, select the piece to move (Row, Column)"
+    puts "Player #{@player_turn}, select the piece to move (Column, Row)"
     user_input = gets.chomp.split('')
     user_input[0] = @letter_number[user_input[0]]
     @selected_piece = user_input.each.map(&:to_i)
@@ -53,7 +62,7 @@ class Game
 
 
   def move_to_coordinates
-    puts "Player #{@player_turn}, enter the coordinates to move to (Row, Column)"
+    puts "Player #{@player_turn}, enter the coordinates to move to (Column, Row)"
     user_input = gets.chomp.split('')
     user_input[0] = @letter_number[user_input[0]]
     @player_move = user_input.each.map(&:to_i)

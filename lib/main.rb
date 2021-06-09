@@ -8,7 +8,8 @@ require_relative 'pieces.rb'
 def play_game
   game = Game.new
   game.board.piece_setup
-  
+  game.board.display_board
+
   # this doesn't break out if a conidition is false. Real script will need to
   5.times do
   game.piece_selection
