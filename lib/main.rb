@@ -15,13 +15,16 @@ def play_game
   game.piece_selection
   game.move_to_coordinates
   game.find_coordinate_difference
+  
   game.pass_pawn_variables
   game.pass_knight_variables
+  game.pass_rook_variables
 
   game.board.display_board
 
   game.pawn.pawn_movement_checks
   game.knight.knight_movement_checks
+  game.rook.rook_movement_checks
 
   game.board.display_board
   end

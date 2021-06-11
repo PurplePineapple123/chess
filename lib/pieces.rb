@@ -6,7 +6,6 @@ module Pieces
     @black_pieces = ["P(b)", "R(b)", "N(b)", "B(b)", "Q(b)", "K(b)"]  
   end
   
-
   def selected_piece(piece)
     @selected_piece = piece
   end
@@ -35,8 +34,6 @@ module Pieces
     @black_pieces.each do |piece|
       if piece == @board.piece_at_coordinates(@last)
         return true
-      else
-        return false
       end
     end
   end
@@ -45,8 +42,6 @@ module Pieces
     @white_pieces.each do |piece|
       if piece == @board.piece_at_coordinates(@last)
         return true
-      else
-        return false
       end
     end
   end

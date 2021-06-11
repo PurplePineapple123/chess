@@ -2,18 +2,18 @@
 
 require_relative 'board.rb'
 require_relative './knight'
-
+require_relative './rook'
 require_relative './pawn'
 
 class Game
   
-  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight
+  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight, :rook
 
   def initialize
     @board = Board.new
     @pawn = Pawn.new
     @knight = Knight.new
-    #@rook = Rook.new
+    @rook = Rook.new
     @player_turn = 1
     @player_move 
     @selected_piece
