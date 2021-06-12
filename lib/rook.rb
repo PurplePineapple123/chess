@@ -33,20 +33,20 @@ class Rook
 
   def rook_movement
     if @last[0] > @selected_piece[0]
-      rook_movement_up
+      piece_movement_up
     elsif @last[0] < @selected_piece[0]
-      rook_movement_down
+      piece_movement_down
     elsif @last[1] > @selected_piece[1]
-      rook_movement_right
+      piece_movement_right
     elsif @last[1] < @selected_piece[1]
-      rook_movement_left
+      piece_movement_left
     end
   end
 
   def rook_movement_checks
     if is_rook?
       rook_movement
-      if valid_end_coordinate? == true && @rook_blockage == false && valid_move? == true
+      if valid_end_coordinate? == true && @piece_blockage == false && valid_move? == true
         move_piece(@selected_piece, @last, @rook_color)
       else
         puts "redo piece entry"
@@ -54,44 +54,5 @@ class Rook
     end
   end
 
-  private
-
-  def rook_movement_up
-    @rook_blockage = false
-
-    until @start[0] == @last[0] - 1 || @rook_blockage == true
-      @start = @start[0] + 1, @start[1]
-      return @rook_blockage = true if @board.piece_at_coordinates(@start) != " .  "
-    end
-  end
-
-  def rook_movement_down
-    @rook_blockage = false
-
-    until @start[0] == @last[0] + 1 || @rook_blockage == true
-      @start = @start[0] - 1, @start[1]
-      return @rook_blockage = true if @board.piece_at_coordinates(@start) != " .  "
-    end
-  end
-
-  def rook_movement_left
-    @rook_blockage = false
-
-    until @start[1] == @last[1] + 1 || @rook_blockage == true
-      @start = @start[0], @start[1] - 1
-      return @rook_blockage = true if @board.piece_at_coordinates(@start) != " .  "
-    end
-  end
-
-  def rook_movement_right
-    @rook_blockage = false
-
-    until @start[1] == @last[1] - 1 || @rook_blockage == true
-      @start = @start[0], @start[1] + 1
-      return @rook_blockage = true if @board.piece_at_coordinates(@start) != " .  "
-    end
-  end
 end
 
-# rook = Rook.new
-# rook.rook_movement

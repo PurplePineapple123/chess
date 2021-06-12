@@ -24,7 +24,7 @@ class Board
     @board[0] = ["R(w)", "N(w)", "B(w)", "Q(w)", "K(w)", "B(w)", "N(w)", "R(w)"]
 
     #delete after rook testing
-    @board[4][4] = "R(b)"
+    @board[4][4] = "B(b)"
     @board[4][2] = "R(w)"
 
     @board[6] = ["P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)"]
@@ -66,12 +66,3 @@ class Board
   end
 end
 
-# new_board = Board.new
-# new_board.piece_setup
-# new_board.display_board
-# puts ""
-# new_board.reflect_game_board
-# new_board.display_board
-# puts ""
-# new_board.reflect_game_board
-# new_board.display_board

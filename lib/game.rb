@@ -4,16 +4,19 @@ require_relative 'board.rb'
 require_relative './knight'
 require_relative './rook'
 require_relative './pawn'
+require_relative './bishop'
+
 
 class Game
   
-  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight, :rook
+  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight, :rook, :bishop
 
   def initialize
     @board = Board.new
     @pawn = Pawn.new
     @knight = Knight.new
     @rook = Rook.new
+    @bishop = Bishop.new
     @player_turn = 1
     @player_move 
     @selected_piece
@@ -47,6 +50,14 @@ class Game
     @rook.board_access(@board)
   end
 
+  def pass_bishop_variables
+    @bishop.selected_piece(@selected_piece)
+    @bishop.start_variable(@start)
+    @bishop.last_variable(@last)
+    @bishop.pawn_coordinate_difference(@coordinate_difference)
+    @bishop.board_access(@board)
+  end
+
   def piece_selection
     # need to add proper letter check (make all lowercase)
     # proper input check(error handling loop)
@@ -78,13 +89,4 @@ class Game
 
 
 end
-
-#test = Game.new
-#test.piece_selection
-# test.move_to_coordinates
-# test.pawn_blockage?
-
-# test.piece_selection
- #test.move_to_coordinates
-# test.pawn_blockage?
 

@@ -19,12 +19,14 @@ def play_game
   game.pass_pawn_variables
   game.pass_knight_variables
   game.pass_rook_variables
+  game.pass_bishop_variables
 
   game.board.display_board
 
   game.pawn.pawn_movement_checks
   game.knight.knight_movement_checks
   game.rook.rook_movement_checks
+  game.bishop.bishop_movement_checks
 
   game.board.display_board
   end
