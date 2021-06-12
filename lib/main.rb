@@ -20,6 +20,7 @@ def play_game
   game.pass_knight_variables
   game.pass_rook_variables
   game.pass_bishop_variables
+  game.pass_queen_variables
 
   game.board.display_board
 
@@ -27,6 +28,7 @@ def play_game
   game.knight.knight_movement_checks
   game.rook.rook_movement_checks
   game.bishop.bishop_movement_checks
+  game.queen.queen_movement_checks
 
   game.board.display_board
   end

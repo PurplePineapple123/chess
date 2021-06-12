@@ -5,11 +5,11 @@ require_relative './knight'
 require_relative './rook'
 require_relative './pawn'
 require_relative './bishop'
-
+require_relative './queen'
 
 class Game
   
-  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight, :rook, :bishop
+  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight, :rook, :bishop, :queen
 
   def initialize
     @board = Board.new
@@ -17,6 +17,7 @@ class Game
     @knight = Knight.new
     @rook = Rook.new
     @bishop = Bishop.new
+    @queen = Queen.new
     @player_turn = 1
     @player_move 
     @selected_piece
@@ -56,6 +57,14 @@ class Game
     @bishop.last_variable(@last)
     @bishop.pawn_coordinate_difference(@coordinate_difference)
     @bishop.board_access(@board)
+  end
+
+  def pass_queen_variables
+    @queen.selected_piece(@selected_piece)
+    @queen.start_variable(@start)
+    @queen.last_variable(@last)
+    @queen.pawn_coordinate_difference(@coordinate_difference)
+    @queen.board_access(@board)
   end
 
   def piece_selection

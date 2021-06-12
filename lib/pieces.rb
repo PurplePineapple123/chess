@@ -54,6 +54,13 @@ module Pieces
     return true if (@coordinate_difference[0]).abs == (@coordinate_difference[1]).abs
   end
 
+  def valid_move?
+    if (@selected_piece[0] < @last[0] || @selected_piece[0] > @last[0]) && @selected_piece[1] == @last[1] ||
+       (@selected_piece[1] < @last[1] || @selected_piece[1] > @last[1]) && @selected_piece[0] == @last[0]
+      return true
+    end
+  end
+
 
   def piece_movement_up
     @piece_blockage = false

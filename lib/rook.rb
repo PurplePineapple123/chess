@@ -17,12 +17,7 @@ class Rook
     end
   end
 
-  def valid_move?
-    if (@selected_piece[0] < @last[0] || @selected_piece[0] > @last[0]) && @selected_piece[1] == @last[1] ||
-       (@selected_piece[1] < @last[1] || @selected_piece[1] > @last[1]) && @selected_piece[0] == @last[0]
-      return true
-    end
-  end
+ 
 
   def valid_end_coordinate?
     if @rook_color == "R(b)" && (black_attack_white? == true || normal_move? == true) ||
