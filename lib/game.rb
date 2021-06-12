@@ -6,10 +6,13 @@ require_relative './rook'
 require_relative './pawn'
 require_relative './bishop'
 require_relative './queen'
+require_relative './king'
+
 
 class Game
   
-  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, :pawn, :knight, :rook, :bishop, :queen
+  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, 
+              :pawn, :knight, :rook, :bishop, :queen, :king
 
   def initialize
     @board = Board.new
@@ -18,6 +21,7 @@ class Game
     @rook = Rook.new
     @bishop = Bishop.new
     @queen = Queen.new
+    @king = King.new
     @player_turn = 1
     @player_move 
     @selected_piece
@@ -66,6 +70,15 @@ class Game
     @queen.pawn_coordinate_difference(@coordinate_difference)
     @queen.board_access(@board)
   end
+
+  def pass_king_variables
+    @king.selected_piece(@selected_piece)
+    @king.start_variable(@start)
+    @king.last_variable(@last)
+    @king.pawn_coordinate_difference(@coordinate_difference)
+    @king.board_access(@board)
+  end
+
 
   def piece_selection
     # need to add proper letter check (make all lowercase)

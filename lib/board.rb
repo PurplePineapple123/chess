@@ -25,7 +25,7 @@ class Board
 
     #delete after rook testing
     @board[4][4] = "B(b)"
-    @board[4][2] = "R(w)"
+    @board[4][2] = "K(w)"
 
     @board[6] = ["P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)"]
     @board[7] = ["R(b)", "N(b)", "B(b)", "Q(b)", "K(b)", "B(b)", "N(b)", "R(b)"]
