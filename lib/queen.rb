@@ -47,12 +47,38 @@ class Queen
 
 
   def queen_movement_checks 
+    
+
     if is_queen?
+    
       queen_movement
       if valid_end_coordinate? == true && @piece_blockage == false && (valid_diagonal_move? == true || valid_move? == true)
+        p @selected_piece
+        p @last
         move_piece(@selected_piece, @last, @queen_color)
       else
         puts "redo piece entry"
+      end
+    end
+  end
+
+  def queen_check_king?(piece)
+    # if piece == "Q(w)"
+    #   @last = @board.coordinates_for_piece("K(b)")
+    # elsif piece == "Q(b)"
+    #   @last = @board.coordinates_for_piece("K(w)")
+    # end
+
+    @last = @board.coordinates_for_piece("K(b)")
+    @coordinate_difference = @last[1] - @selected_piece[1], @last[0] - @selected_piece[0]
+
+    if is_queen?
+      queen_movement
+      if valid_end_coordinate? == true && @piece_blockage == false && (valid_diagonal_move? == true || valid_move? == true)
+        @check = true
+        puts "Queen to King is in Check: #{@selected_piece}, #{@last}"
+      # else
+      #   puts "Queen no check"
       end
     end
   end

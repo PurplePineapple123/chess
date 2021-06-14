@@ -1,7 +1,6 @@
 require_relative "./pieces"
 
 class Bishop
-  
   include Pieces
 
   def initialize
@@ -17,7 +16,6 @@ class Bishop
       return true
     end
   end
-
 
   def valid_end_coordinate?
     if @bishop_color == "B(b)" && (black_attack_white? == true || normal_move? == true) ||
@@ -37,9 +35,8 @@ class Bishop
       piece_movement_down_left
     end
   end
-  
 
-  def bishop_movement_checks 
+  def bishop_movement_checks
     if is_bishop?
       bishop_movement
       if valid_end_coordinate? == true && @piece_blockage == false && valid_diagonal_move? == true
@@ -49,6 +46,4 @@ class Bishop
       end
     end
   end
-
-
 end

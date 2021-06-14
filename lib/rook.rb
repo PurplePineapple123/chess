@@ -18,8 +18,7 @@ class Rook
     end
   end
 
- 
-
+  # black v white and normal move dont use @start, they use @ last
   def valid_end_coordinate?
     if @rook_color == "R(b)" && (black_attack_white? == true || normal_move? == true) ||
        @rook_color == "R(w)" && (white_attack_black? == true || normal_move? == true)
@@ -40,7 +39,6 @@ class Rook
   end
 
   def rook_movement_checks
-
     if is_rook?
       rook_movement
       if valid_end_coordinate? == true && @piece_blockage == false && valid_move? == true
@@ -51,13 +49,7 @@ class Rook
     end
   end
 
-
   def rook_check_king?(piece)
-    
-    # watch out for @start and @ selected piece and how the 2 play together 
-
-    @start = @selected_piece
-
 
     if piece == "R(w)"
       @last = @board.coordinates_for_piece("K(b)")
@@ -69,11 +61,11 @@ class Rook
       rook_movement
       if valid_end_coordinate? == true && @piece_blockage == false && valid_move? == true
         @check = true
-        puts "King is in Check"
-      else 
-        puts "no check"
+        puts "Rook to King is in Check: #{@selected_piece}, #{@last}"
+      # else
+      #   puts "Rook no check"
       end
     end
   end
-end
 
+end

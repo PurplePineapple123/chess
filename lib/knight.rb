@@ -9,10 +9,10 @@ class Knight
   end
 
   def is_knight?
-    if @board.piece_at_coordinates(@start) == "N(b)"
+    if @board.piece_at_coordinates(@selected_piece) == "N(b)"
       @knight_color = "N(b)"
       true
-    elsif @board.piece_at_coordinates(@start) == "N(w)"
+    elsif @board.piece_at_coordinates(@selected_piece) == "N(w)"
       @knight_color = "N(w)"
       true
     else

@@ -24,11 +24,13 @@ class Board
     @board[0] = ["R(w)", "N(w)", "B(w)", "Q(w)", "K(w)", "B(w)", "N(w)", "R(w)"]
 
     #delete after rook testing
-    @board[4][4] = "R(w)"
-    @board[4][2] = "K(w)"
+    
+    @board[3][5] = "Q(w)"
+    @board[4][4] = "K(b)"
+    @board[4][2] = "R(w)"
 
     @board[6] = ["P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)"]
-    @board[7] = ["R(b)", "N(b)", "B(b)", "Q(b)", "K(b)", "B(b)", "N(b)", "R(b)"]
+    @board[7] = ["R(b)", "N(b)", "B(b)", "Q(b)", "Q(b)", "B(b)", "N(b)", "R(b)"]
   end
 
   def piece_at_coordinates(piece)
@@ -37,16 +39,13 @@ class Board
 
   # this only works for first time piece shows up. Does not work with duplciates. needs to be fixed
   def coordinates_for_piece(piece)
-
-  
-     test = @board.map { |item| item.find_index(piece) }
-   x = test.find{|x| !x.nil?}
-   y = test.find_index{|y| !y.nil?}
-   #p "[#{y},#{x}]"
-   return [y, x]
+    
+    test = @board.map { |item| item.find_index(piece) }
+    x = test.find { |x| !x.nil? }
+    y = test.find_index { |y| !y.nil? }
+    #p "[#{y},#{x}]"
+    return [y, x]
   end
-
-
 
   def update_board(start, last, piece)
     @board[start[0]][start[1]] = " .  "
@@ -67,15 +66,14 @@ class Board
       @board[last[0]][last[1]] = "Q(b)"
     elsif piece == "Q(w)"
       @board[last[0]][last[1]] = "Q(w)"
-    elsif piece == 'K(b)'
-      @board[last[0]][last[1]] = 'K(b)'
-    elsif piece == 'K(w)'
-      @board[last[0]][last[1]] = 'K(w)'
-    elsif piece == 'B(b)'
-      @board[last[0]][last[1]] = 'B(b)'
-    elsif piece == 'B(w)'
-      @board[last[0]][last[1]] = 'B(w)'
+    elsif piece == "K(b)"
+      @board[last[0]][last[1]] = "K(b)"
+    elsif piece == "K(w)"
+      @board[last[0]][last[1]] = "K(w)"
+    elsif piece == "B(b)"
+      @board[last[0]][last[1]] = "B(b)"
+    elsif piece == "B(w)"
+      @board[last[0]][last[1]] = "B(w)"
     end
   end
 end
-

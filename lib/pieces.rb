@@ -1,11 +1,9 @@
-
 module Pieces
-
   def pieces_variables
     @white_pieces = ["P(w)", "R(w)", "N(w)", "B(w)", "Q(w)", "K(w)"]
     @black_pieces = ["P(b)", "R(b)", "N(b)", "B(b)", "Q(b)", "K(b)"]
   end
-  
+
   def selected_piece(piece)
     @selected_piece = piece
   end
@@ -25,7 +23,7 @@ module Pieces
   def board_access(board)
     @board = board
   end
-  
+
   def move_piece(selected_piece, last, piece)
     @board.update_board(selected_piece, last, piece)
   end
@@ -51,7 +49,7 @@ module Pieces
   end
 
   def valid_diagonal_move?
-    return true if (@coordinate_difference[0]).abs == (@coordinate_difference[1]).abs
+    return true if ((@coordinate_difference[0]).abs) == ((@coordinate_difference[1]).abs)
   end
 
   def valid_move?
@@ -61,81 +59,85 @@ module Pieces
     end
   end
 
-
   def piece_movement_up
     @piece_blockage = false
+    temporary_piece = @selected_piece
 
-    until @start[0] == @last[0] - 1 || @piece_blockage == true
-      @start = @start[0] + 1, @start[1]
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    until temporary_piece[0] == @last[0] - 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0] + 1, temporary_piece[1]
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   def piece_movement_down
     @piece_blockage = false
+    temporary_piece = @selected_piece
 
-    until @start[0] == @last[0] + 1 || @piece_blockage == true
-      @start = @start[0] - 1, @start[1]
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+
+    until temporary_piece[0] == @last[0] + 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0] - 1, temporary_piece[1]
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   def piece_movement_left
     @piece_blockage = false
+    temporary_piece = @selected_piece
 
-    until @start[1] == @last[1] + 1 || @piece_blockage == true
-      @start = @start[0], @start[1] - 1
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    until temporary_piece[1] == @last[1] + 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0], temporary_piece[1] - 1
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   def piece_movement_right
     @piece_blockage = false
+    temporary_piece = @selected_piece
 
-    until @start[1] == @last[1] - 1 || @piece_blockage == true
-      @start = @start[0], @start[1] + 1
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    until temporary_piece[1] == @last[1] - 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0], temporary_piece[1] + 1
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   # diagonal moves
   def piece_movement_up_right
     @piece_blockage = false
-    puts "up right"
-    until @start[0] == @last[0] - 1 || @piece_blockage == true
-      @start = @start[0] + 1, @start[1] + 1
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    temporary_piece = @selected_piece
+    #puts "up right"
+    until temporary_piece[0] == @last[0] - 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0] + 1, temporary_piece[1] + 1
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   def piece_movement_down_right
     @piece_blockage = false
-    puts "down right"
-    until @start[0] == @last[0] + 1 || @piece_blockage == true
-      @start = @start[0] - 1, @start[1] + 1
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    temporary_piece = @selected_piece
+    #puts "down right"
+    until temporary_piece[0] == @last[0] + 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0] - 1, temporary_piece[1] + 1
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   def piece_movement_up_left
     @piece_blockage = false
-    puts "up left"
-    until @start[1] == @last[1] + 1 || @piece_blockage == true
-      @start = @start[0] + 1, @start[1] - 1
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    temporary_piece = @selected_piece
+    #puts "up left"
+    until temporary_piece[1] == @last[1] + 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0] + 1, temporary_piece[1] - 1
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
 
   def piece_movement_down_left
     @piece_blockage = false
-    puts "down left"
-    until @start[1] == @last[1] + 1 || @piece_blockage == true
-      @start = @start[0] - 1, @start[1] - 1
-      return @piece_blockage = true if @board.piece_at_coordinates(@start) != " .  "
+    temporary_piece = @selected_piece
+    #puts "down left"
+    until temporary_piece[1] == @last[1] + 1 || @piece_blockage == true
+      temporary_piece = temporary_piece[0] - 1, temporary_piece[1] - 1
+      return @piece_blockage = true if @board.piece_at_coordinates(temporary_piece) != " .  "
     end
   end
-
-  
-  
-
 end

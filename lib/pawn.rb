@@ -21,8 +21,8 @@ class Pawn
 
   # is piece a pawn?
   def is_pawn?
-    if @board.piece_at_coordinates(@start) == "P(b)" ||
-       @board.piece_at_coordinates(@start) == "P(w)"
+    if @board.piece_at_coordinates(@selected_piece) == "P(b)" ||
+       @board.piece_at_coordinates(@selected_piece) == "P(w)"
       true
     else
       false
@@ -71,9 +71,9 @@ class Pawn
   end
 
   def pawn_color
-    if @board.piece_at_coordinates(@start) == "P(b)"
+    if @board.piece_at_coordinates(@selected_piece) == "P(b)"
       @pawn_piece = "P(b)"
-    elsif @board.piece_at_coordinates(@start) == "P(w)"
+    elsif @board.piece_at_coordinates(@selected_piece) == "P(w)"
       @pawn_piece = "P(w)"
     end
   end
@@ -107,6 +107,8 @@ class Pawn
     if is_pawn?
       pawn_color
       if valid_move? == true && pawn_blockage? == false
+        p @selected_piece
+        p @last
         move_piece(@selected_piece, @last, @pawn_piece)
       else
         puts valid_move?
@@ -154,10 +156,12 @@ class Pawn
   end
 
   def pawn_blockage_white_test
-    until @start == @last || @pawn_blockage == true
-      @start = @start[0] + 1, @start[1]
-      if @board.piece_at_coordinates(@start) == " .  "
-        puts "start: #{@start}"
+    temporary_piece = @selected_piece
+
+    until temporary_piece == @last || @pawn_blockage == true
+      temporary_piece = temporary_piece[0] + 1, temporary_piece[1]
+      if @board.piece_at_coordinates(temporary_piece) == " .  "
+        #puts "start: #{temporary_piece}"
       else
         puts "pawn blockage"
         @pawn_blockage = true
@@ -166,10 +170,12 @@ class Pawn
   end
 
   def pawn_blockage_black_test
-    until @start == @last || @pawn_blockage == true
-      @start = @start[0] - 1, @start[1]
-      if @board.piece_at_coordinates(@start) == " .  "
-        puts "start: #{@start}"
+    temporary_piece = @selected_piece
+
+    until temporary_piece == @last || @pawn_blockage == true
+      temporary_piece = temporary_piece[0] - 1, temporary_piece[1]
+      if @board.piece_at_coordinates(temporary_piece) == " .  "
+        #puts "start: #{temporary_piece}"
       else
         puts "pawn blockage"
         @pawn_blockage = true
