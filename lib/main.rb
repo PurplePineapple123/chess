@@ -36,10 +36,9 @@ def play_game
     game.queen.queen_movement_checks
     game.king.king_movement_checks
 
-    game.board.display_board
-
-
     game.check_each_piece
+
+    game.board.display_board
 
 
   end

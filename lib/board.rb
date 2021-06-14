@@ -47,10 +47,6 @@ class Board
   end
 
 
-  def pass_board
-
-
-  end
 
   def update_board(start, last, piece)
     @board[start[0]][start[1]] = " .  "

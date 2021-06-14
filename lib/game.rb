@@ -70,11 +70,13 @@ class Game
     @board.board.each_with_index do |sub_array, y|
       sub_array.each_with_index do |piece, x|
       @selected_piece = [y, x]
-      
+      @start = @selected_piece
+
       if @board.piece_at_coordinates(@selected_piece) == 'R(w)'
 
         @rook.selected_piece(@selected_piece)
-        @rook.rook_check_king?
+        @rook.selected_piece(@start)
+        @rook.rook_check_king?(piece)
       end
 
       end

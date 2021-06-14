@@ -52,15 +52,20 @@ class Rook
   end
 
 
-  def rook_check_king?
-    @last = @board.coordinates_for_piece("K(b)")
+  def rook_check_king?(piece)
     
-    # selected piece is equal to the current piece being checked
+    # watch out for @start and @ selected piece and how the 2 play together 
+
+    @start = @selected_piece
+
+
+    if piece == "R(w)"
+      @last = @board.coordinates_for_piece("K(b)")
+    elsif piece == "R(b)"
+      @last = @board.coordinates_for_piece("K(w)")
+    end
 
     if is_rook?
-    #0  p "last: #{@last}"
-      #p "selected piece: #{@selected_piece}"
-
       rook_movement
       if valid_end_coordinate? == true && @piece_blockage == false && valid_move? == true
         @check = true
