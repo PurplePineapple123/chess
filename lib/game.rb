@@ -72,6 +72,9 @@ class Game
       elsif @board.piece_at_coordinates(@selected_piece) == 'Q(w)' || @board.piece_at_coordinates(@selected_piece) == 'Q(b)'
         @queen.selected_piece(@selected_piece)
         @queen.queen_check_king?(piece)
+      elsif @board.piece_at_coordinates(@selected_piece) == 'B(w)' || @board.piece_at_coordinates(@selected_piece) == 'B(b)'
+        @bishop.selected_piece(@selected_piece)
+        @bishop.bishop_check_king?(piece)
       end
 
       end

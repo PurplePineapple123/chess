@@ -25,7 +25,7 @@ class Board
 
     #delete after rook testing
     
-    @board[3][5] = "Q(w)"
+    @board[3][5] = "B(w)"
     @board[4][4] = "K(b)"
     @board[4][2] = "R(w)"
 

@@ -63,13 +63,12 @@ class Queen
   end
 
   def queen_check_king?(piece)
-    # if piece == "Q(w)"
-    #   @last = @board.coordinates_for_piece("K(b)")
-    # elsif piece == "Q(b)"
-    #   @last = @board.coordinates_for_piece("K(w)")
-    # end
+    if piece == "Q(w)"
+      @last = @board.coordinates_for_piece("K(b)")
+    elsif piece == "Q(b)"
+      @last = @board.coordinates_for_piece("K(w)")
+    end
 
-    @last = @board.coordinates_for_piece("K(b)")
     @coordinate_difference = @last[1] - @selected_piece[1], @last[0] - @selected_piece[0]
 
     if is_queen?
