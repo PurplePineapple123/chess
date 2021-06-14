@@ -31,6 +31,57 @@ class Game
     @letter_number = {'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8}
   end
 
+  
+  def piece_selection
+    # need to add proper letter check (make all lowercase)
+    # proper input check(error handling loop)
+    
+   
+    puts "Player #{@player_turn}, select the piece to move (Column, Row)"
+    user_input = gets.chomp.split('')
+    user_input[0] = @letter_number[user_input[0]]
+    @selected_piece = user_input.each.map(&:to_i)
+    @selected_piece = @selected_piece[1] - 1, @selected_piece[0] - 1
+    @start = @selected_piece
+  end
+
+
+  def move_to_coordinates
+    puts "Player #{@player_turn}, enter the coordinates to move to (Column, Row)"
+    user_input = gets.chomp.split('')
+    user_input[0] = @letter_number[user_input[0]]
+    @player_move = user_input.each.map(&:to_i)
+    @player_move = @player_move[1] - 1, @player_move[0] - 1
+    @last = @player_move
+
+    # enter validation to make sure selected coordinates are not outside the grid
+  end
+
+  def find_coordinate_difference
+    @coordinate_difference = @player_move[1] - @selected_piece[1], @player_move[0] - @selected_piece[0]
+  end
+
+
+  def check_each_piece
+    
+    # problem, for duplicate pieces, only the first one (with its first coordinates of appearance) are shown
+
+
+    @board.board.each_with_index do |sub_array, y|
+      sub_array.each_with_index do |piece, x|
+      @selected_piece = [y, x]
+      
+      if @board.piece_at_coordinates(@selected_piece) == 'R(w)'
+
+        @rook.selected_piece(@selected_piece)
+        @rook.rook_check_king?
+      end
+
+      end
+    end
+  end
+
+
   def pass_pawn_variables
     @pawn.selected_piece(@selected_piece)
     @pawn.start_variable(@start)
@@ -78,37 +129,6 @@ class Game
     @king.pawn_coordinate_difference(@coordinate_difference)
     @king.board_access(@board)
   end
-
-
-  def piece_selection
-    # need to add proper letter check (make all lowercase)
-    # proper input check(error handling loop)
-    
-   
-    puts "Player #{@player_turn}, select the piece to move (Column, Row)"
-    user_input = gets.chomp.split('')
-    user_input[0] = @letter_number[user_input[0]]
-    @selected_piece = user_input.each.map(&:to_i)
-    @selected_piece = @selected_piece[1] - 1, @selected_piece[0] - 1
-    @start = @selected_piece
-  end
-
-
-  def move_to_coordinates
-    puts "Player #{@player_turn}, enter the coordinates to move to (Column, Row)"
-    user_input = gets.chomp.split('')
-    user_input[0] = @letter_number[user_input[0]]
-    @player_move = user_input.each.map(&:to_i)
-    @player_move = @player_move[1] - 1, @player_move[0] - 1
-    @last = @player_move
-
-    # enter validation to make sure selected coordinates are not outside the grid
-  end
-
-  def find_coordinate_difference
-    @coordinate_difference = @player_move[1] - @selected_piece[1], @player_move[0] - @selected_piece[0]
-  end
-
 
 end
 

@@ -5,6 +5,7 @@ class Rook
 
   def initialize
     @initialize_pieces = pieces_variables
+    @check = false
   end
 
   def is_rook?
@@ -39,6 +40,7 @@ class Rook
   end
 
   def rook_movement_checks
+
     if is_rook?
       rook_movement
       if valid_end_coordinate? == true && @piece_blockage == false && valid_move? == true
@@ -49,5 +51,24 @@ class Rook
     end
   end
 
+
+  def rook_check_king?
+    @last = @board.coordinates_for_piece("K(b)")
+    
+    # selected piece is equal to the current piece being checked
+
+    if is_rook?
+    #0  p "last: #{@last}"
+      #p "selected piece: #{@selected_piece}"
+
+      rook_movement
+      if valid_end_coordinate? == true && @piece_blockage == false && valid_move? == true
+        @check = true
+        puts "King is in Check"
+      else 
+        puts "no check"
+      end
+    end
+  end
 end
 
