@@ -47,4 +47,24 @@ class Knight
     end
   end
 
+
+  def knight_check_king?(piece)
+    if piece == "N(w)"
+      @last = @board.coordinates_for_piece("K(b)")
+    elsif piece == "N(b)"
+      @last = @board.coordinates_for_piece("K(w)")
+    end
+
+    @coordinate_difference = @last[1] - @selected_piece[1], @last[0] - @selected_piece[0]
+
+    if is_knight?
+      if valid_move? == true && valid_end_coordinate? == true
+        @check = true
+        puts "Knight to King is in Check: #{@selected_piece}, #{@last}"
+      # else
+      #   puts "Queen no check"
+      end
+    end
+  end
+
 end

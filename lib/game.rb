@@ -75,6 +75,12 @@ class Game
       elsif @board.piece_at_coordinates(@selected_piece) == 'B(w)' || @board.piece_at_coordinates(@selected_piece) == 'B(b)'
         @bishop.selected_piece(@selected_piece)
         @bishop.bishop_check_king?(piece)
+      elsif @board.piece_at_coordinates(@selected_piece) == 'N(w)' || @board.piece_at_coordinates(@selected_piece) == 'N(b)'
+        @knight.selected_piece(@selected_piece)
+        @knight.knight_check_king?(piece)
+      elsif @board.piece_at_coordinates(@selected_piece) == 'P(w)' || @board.piece_at_coordinates(@selected_piece) == 'P(b)'
+        @pawn.selected_piece(@selected_piece)
+        @pawn.pawn_check_king?(piece)
       end
 
       end

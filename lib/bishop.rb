@@ -48,7 +48,6 @@ class Bishop
   end
 
   def bishop_check_king?(piece)
-
     if piece == "B(w)"
       @last = @board.coordinates_for_piece("K(b)")
     elsif piece == "B(b)"
@@ -57,16 +56,14 @@ class Bishop
 
     @coordinate_difference = @last[1] - @selected_piece[1], @last[0] - @selected_piece[0]
 
-
     if is_bishop?
       bishop_movement
       if valid_end_coordinate? == true && @piece_blockage == false && valid_diagonal_move? == true
         @check = true
         puts "Bishop to King is in Check: #{@selected_piece}, #{@last}"
-      # else
-      #   puts "Rook no check"
+        # else
+        #   puts "Rook no check"
       end
     end
   end
-
 end

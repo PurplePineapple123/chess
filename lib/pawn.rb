@@ -107,12 +107,29 @@ class Pawn
     if is_pawn?
       pawn_color
       if valid_move? == true && pawn_blockage? == false
-        p @selected_piece
-        p @last
         move_piece(@selected_piece, @last, @pawn_piece)
       else
         puts valid_move?
         puts "redo piece entry"
+      end
+    end
+  end
+
+  def pawn_check_king?(piece)
+    if piece == "P(w)"
+      @last = @board.coordinates_for_piece("K(b)")
+    elsif piece == "P(b)"
+      @last = @board.coordinates_for_piece("K(w)")
+    end
+
+    @coordinate_difference = @last[1] - @selected_piece[1], @last[0] - @selected_piece[0]
+
+    if is_pawn?
+      if attack_move? == true && pawn_blockage? == false
+        @check = true
+        puts "Pawn to King is in Check: #{@selected_piece}, #{@last}"
+        # else
+        #   puts "Rook no check"
       end
     end
   end

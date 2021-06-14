@@ -24,10 +24,12 @@ class Board
     @board[0] = ["R(w)", "N(w)", "B(w)", "Q(w)", "K(w)", "B(w)", "N(w)", "R(w)"]
 
     #delete after rook testing
-    
-    @board[3][5] = "B(w)"
+
+    #@board[3][5] = "B(w)"
+    #@board[2][5] = "N(w)"
+
     @board[4][4] = "K(b)"
-    @board[4][2] = "R(w)"
+    #@board[4][2] = "R(w)"
 
     @board[6] = ["P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)", "P(b)"]
     @board[7] = ["R(b)", "N(b)", "B(b)", "Q(b)", "Q(b)", "B(b)", "N(b)", "R(b)"]
@@ -39,7 +41,6 @@ class Board
 
   # this only works for first time piece shows up. Does not work with duplciates. needs to be fixed
   def coordinates_for_piece(piece)
-    
     test = @board.map { |item| item.find_index(piece) }
     x = test.find { |x| !x.nil? }
     y = test.find_index { |y| !y.nil? }
