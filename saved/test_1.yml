@@ -1,0 +1,306 @@
+---
+- !ruby/object:Game
+  board: &2 !ruby/object:Board
+    board:
+    - - R(w)
+      - N(w)
+      - B(w)
+      - Q(w)
+      - K(w)
+      - B(w)
+      - N(w)
+      - R(w)
+    - - " .  "
+      - P(w)
+      - P(w)
+      - P(w)
+      - P(w)
+      - P(w)
+      - P(w)
+      - P(w)
+    - - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+    - - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+    - - " .  "
+      - P(w)
+      - " .  "
+      - " .  "
+      - K(b)
+      - " .  "
+      - " .  "
+      - " .  "
+    - - " .  "
+      - " .  "
+      - N(b)
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+      - " .  "
+    - - P(b)
+      - " .  "
+      - P(b)
+      - P(b)
+      - P(b)
+      - P(b)
+      - P(b)
+      - P(b)
+    - - R(b)
+      - " .  "
+      - B(b)
+      - Q(b)
+      - Q(b)
+      - B(b)
+      - N(b)
+      - R(b)
+  pawn: !ruby/object:Pawn
+    pawn_blockage: false
+    first_move_white:
+    - - 0
+      - 2
+    - - 0
+      - 1
+    normal_move_white:
+    - - 0
+      - 1
+    attack_move_white:
+    - - 1
+      - 1
+    - - -1
+      - 1
+    first_move_black:
+    - - 0
+      - -2
+    - - 0
+      - -1
+    normal_move_black:
+    - - 0
+      - -1
+    attack_move_black:
+    - - -1
+      - -1
+    - - 1
+      - -1
+    white_pieces:
+    - P(w)
+    - R(w)
+    - N(w)
+    - B(w)
+    - Q(w)
+    - K(w)
+    black_pieces: &1
+    - P(b)
+    - R(b)
+    - N(b)
+    - B(b)
+    - Q(b)
+    - K(b)
+    initialize_pieces: *1
+    selected_piece:
+    - 6
+    - 7
+    last:
+    - 0
+    - 4
+    coordinate_difference:
+    - -3
+    - -6
+    board: *2
+    pawn_piece: P(w)
+  knight: !ruby/object:Knight
+    moves:
+    - - 1
+      - 2
+    - - 2
+      - 1
+    - - -1
+      - -2
+    - - -2
+      - -1
+    - - 1
+      - -2
+    - - 2
+      - -1
+    - - -1
+      - 2
+    - - -2
+      - 1
+    white_pieces:
+    - P(w)
+    - R(w)
+    - N(w)
+    - B(w)
+    - Q(w)
+    - K(w)
+    black_pieces: &3
+    - P(b)
+    - R(b)
+    - N(b)
+    - B(b)
+    - Q(b)
+    - K(b)
+    initialize_pieces: *3
+    selected_piece:
+    - 7
+    - 6
+    last:
+    - 0
+    - 4
+    coordinate_difference:
+    - -2
+    - -7
+    board: *2
+    knight_color: N(b)
+  rook: !ruby/object:Rook
+    white_pieces:
+    - P(w)
+    - R(w)
+    - N(w)
+    - B(w)
+    - Q(w)
+    - K(w)
+    black_pieces: &4
+    - P(b)
+    - R(b)
+    - N(b)
+    - B(b)
+    - Q(b)
+    - K(b)
+    initialize_pieces: *4
+    check: false
+    selected_piece: &9
+    - 7
+    - 7
+    last:
+    - 0
+    - 4
+    coordinate_difference: &8
+    - 1
+    - -2
+    board: *2
+    rook_color: R(b)
+    piece_blockage: true
+  bishop: !ruby/object:Bishop
+    white_pieces:
+    - P(w)
+    - R(w)
+    - N(w)
+    - B(w)
+    - Q(w)
+    - K(w)
+    black_pieces: &5
+    - P(b)
+    - R(b)
+    - N(b)
+    - B(b)
+    - Q(b)
+    - K(b)
+    initialize_pieces: *5
+    selected_piece:
+    - 7
+    - 5
+    last:
+    - 0
+    - 4
+    coordinate_difference:
+    - -1
+    - -7
+    board: *2
+    bishop_color: B(b)
+    piece_blockage: false
+  queen: !ruby/object:Queen
+    white_pieces:
+    - P(w)
+    - R(w)
+    - N(w)
+    - B(w)
+    - Q(w)
+    - K(w)
+    black_pieces: &6
+    - P(b)
+    - R(b)
+    - N(b)
+    - B(b)
+    - Q(b)
+    - K(b)
+    initialize_pieces: *6
+    selected_piece:
+    - 7
+    - 4
+    last:
+    - 0
+    - 4
+    coordinate_difference:
+    - 0
+    - -7
+    board: *2
+    queen_color: Q(b)
+    piece_blockage: true
+  king: !ruby/object:King
+    white_pieces:
+    - P(w)
+    - R(w)
+    - N(w)
+    - B(w)
+    - Q(w)
+    - K(w)
+    black_pieces: &7
+    - P(b)
+    - R(b)
+    - N(b)
+    - B(b)
+    - Q(b)
+    - K(b)
+    initialize_pieces: *7
+    valid_move:
+    - - 1
+      - 1
+    - - -1
+      - 1
+    - - 1
+      - -1
+    - - -1
+      - -1
+    - - 0
+      - 1
+    - - 0
+      - -1
+    - - -1
+      - 0
+    - - 1
+      - 0
+    selected_piece:
+    - 7
+    - 1
+    last: &10
+    - 5
+    - 2
+    coordinate_difference: *8
+    board: *2
+  player_turn: 1
+  letter_number:
+    a: 1
+    b: 2
+    c: 3
+    d: 4
+    e: 5
+    f: 6
+    g: 7
+    h: 8
+  selected_piece: *9
+  last: *10
+  coordinate_difference: *8
+  saved_game: test_1

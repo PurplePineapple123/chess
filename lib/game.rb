@@ -7,12 +7,13 @@ require_relative './pawn'
 require_relative './bishop'
 require_relative './queen'
 require_relative './king'
+require "yaml"
 
 
 class Game
   
-  attr_reader :board, :selected_piece, :player_move, :coordinate_difference, 
-              :pawn, :knight, :rook, :bishop, :queen, :king
+  attr_reader :board, :selected_piece, :coordinate_difference, 
+              :pawn, :knight, :rook, :bishop, :queen, :king, :last
 
   def initialize
     @board = Board.new
@@ -35,8 +36,16 @@ class Game
     # proper input check(error handling loop)
     
    
-    puts "Player #{@player_turn}, select the piece to move (Column, Row)"
-    user_input = gets.chomp.split('')
+    puts "Player #{@player_turn}, select the piece to move (Column, Row) or type save to save progress:"
+    user_input = gets.chomp
+
+    if user_input == "save"
+      self.save_game
+      exit
+    else
+      user_input = user_input.split('')
+    end
+
     user_input[0] = @letter_number[user_input[0]]
     @selected_piece = user_input.each.map(&:to_i)
     @selected_piece = @selected_piece[1] - 1, @selected_piece[0] - 1
@@ -45,8 +54,17 @@ class Game
 
 
   def move_to_coordinates
-    puts "Player #{@player_turn}, enter the coordinates to move to (Column, Row)"
-    user_input = gets.chomp.split('')
+    
+    puts "Player #{@player_turn}, enter the coordinates to move to (Column, Row) or type save to save progress:"
+    user_input = gets.chomp
+
+    if user_input == "save"
+      self.save_game
+      exit
+    else
+      user_input = user_input.split('')
+    end
+    
     user_input[0] = @letter_number[user_input[0]]
     @last = user_input.each.map(&:to_i)
     @last = @last[1] - 1, @last[0] - 1
@@ -86,6 +104,49 @@ class Game
       end
     end
   end
+
+
+  def save_game
+    puts "Enter the file name: "
+    @saved_game = gets.chomp
+    Dir.mkdir("saved") unless File.exists?("saved")
+    File.open("./saved/#{@saved_game}.yml", "w") { |file| YAML.dump([] << self, file) }
+    puts "Filed Saved!"
+  end 
+
+
+  def user_select_file
+    puts "Choose the file you want to load: "
+    puts Dir.glob("./saved/*.yml")
+    @user_selection = gets.chomp
+    p "This selection: #{@user_selection}"
+    load_game(@user_selection)
+  end
+
+  def load_game(file)
+    
+    # ./saved/test_1.yml
+    
+    yaml = YAML.load_file(file)
+    # puts "yaml class: #{yaml.class}"
+    # p yaml
+
+    #this is calling the setter method
+    @board = yaml[0].board
+    @pawn = yaml[0].pawn
+    @knight = yaml[0].knight
+    @rook = yaml[0].rook
+    @bishop = yaml[0].bishop
+    @queen = yaml[0].queen
+    @king = yaml[0].king
+
+    @selected_piece = yaml[0].selected_piece
+    @coordinate_difference = yaml[0].coordinate_difference
+    @last = yaml[0].last
+
+    puts "Save loaded!"
+  end
+
 
 
   def pass_pawn_variables

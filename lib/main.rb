@@ -1,12 +1,22 @@
 # /lib/main.rb
 
-require_relative 'board.rb'
-require_relative 'pawn.rb'
-require_relative 'game.rb'
-require_relative 'pieces.rb'
+require_relative "board.rb"
+require_relative "pawn.rb"
+require_relative "game.rb"
+require_relative "pieces.rb"
 
 def play_game
   game = Game.new
+  
+  puts "1) to start a new game   2) to open a saved game"
+  user_choice = gets.chomp
+
+  if user_choice == "2"
+    game.user_select_file
+  end
+  
+  
+  
   game.board.piece_setup
   game.board.display_board
 
@@ -14,12 +24,12 @@ def play_game
 
   # this doesn't break out if a conidition is false. Real script will need to
 
-
   5.times do
+
     game.piece_selection
     game.move_to_coordinates
     game.find_coordinate_difference
-    
+
     game.pass_pawn_variables
     game.pass_knight_variables
     game.pass_rook_variables
@@ -40,9 +50,8 @@ def play_game
 
     game.board.display_board
 
-
+  
   end
-
 end
 
 play_game
